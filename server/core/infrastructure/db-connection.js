@@ -1,7 +1,7 @@
-const mongoose = require( "mongoose")
+const mongoose = require("mongoose")
 
 
-async function connectingDataBase ( ) {
+async function connectingDataBase () {
      
     mongoose.connect(process.env.MONGO_URI)
     .then(()=> {
@@ -10,7 +10,6 @@ async function connectingDataBase ( ) {
     .catch((error)=> {
         console.log("error connecting to database : "  + error.message)
     });
+
 };
-module.exports = {
-    connectingDataBase
-}
+module.exports =  connectingDataBase

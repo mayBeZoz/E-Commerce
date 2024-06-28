@@ -43,11 +43,16 @@ const userSchema = new mongoose.Schema({
         buffer:{
             type:Buffer,
             required:false
+        },
+        href:{
+            type:String,
+            required:false
         }
-    }
+    },
+  
 })
 
-const User = new mongoose.Model('User',userSchema)
+const User = mongoose.model('User',userSchema)
 
 const validateAddUser = (obj) => {
     const schema = joi.object({
@@ -55,7 +60,7 @@ const validateAddUser = (obj) => {
         lastName:joi.string().required().min(3).max(15),
         phone:joi.string().required(),
         email:joi.string().required().email(),
-        password:joi.string().required().min(6),
+        password:joi.string().pattern(/^\S*$/).required().min(6),
         city:joi.string().required(),
         country:joi.string().required(),
     })
@@ -68,7 +73,7 @@ const validateUpdateUser = (obj) => {
         lastName:joi.string().min(3).max(15),
         phone:joi.string(),
         email:joi.string().email(),
-        password:joi.string().min(6),
+        password:joi.string().pattern(/^\S*$/).min(6),
         city:joi.string(),
         country:joi.string(),
     })
